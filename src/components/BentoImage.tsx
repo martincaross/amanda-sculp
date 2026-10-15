@@ -65,7 +65,7 @@ export default function BentoImage({
 
   return (
     <figure
-      className={`group relative h-full w-full overflow-hidden rounded-[1.5rem] bg-sand sm:rounded-[1.75rem] ${className}`}
+      className={`group relative h-full w-full safari-gpu-fix overflow-hidden rounded-[1.5rem] bg-sand sm:rounded-[1.75rem] ${className}`}
     >
       {isDesktop ? (
         <DesktopParallaxImage src={src} alt={alt} sizes={sizes} priority={priority} />

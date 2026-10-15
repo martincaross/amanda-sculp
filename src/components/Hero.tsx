@@ -129,7 +129,7 @@ export default function Hero() {
 
         {/* ---------- Editorial Arched Portrait (Mobile Optimized) ---------- */}
         <div className="relative mx-auto w-full max-w-sm sm:max-w-md lg:col-span-5 lg:max-w-none">
-          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-t-[999px] rounded-b-[2rem] bg-sand shadow-[0_30px_70px_-25px_rgba(28,25,23,0.35)] sm:rounded-b-[2.5rem] lg:aspect-[3/4]">
+          <div className="relative aspect-[4/5] w-full safari-gpu-fix overflow-hidden rounded-t-[999px] rounded-b-[2rem] bg-sand shadow-[0_30px_70px_-25px_rgba(28,25,23,0.35)] sm:rounded-b-[2.5rem] lg:aspect-[3/4]">
             <motion.div
               style={{
                 y: isDesktop ? desktopImgY : 0,

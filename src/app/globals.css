@@ -230,6 +230,12 @@ section[id] {
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
+  .safari-gpu-fix {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
