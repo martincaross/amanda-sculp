@@ -3,7 +3,6 @@ import type { CSSProperties } from "react";
 import { Cormorant_Garamond, Plus_Jakarta_Sans } from "next/font/google";
 import { siteConfig } from "@/data/siteConfig";
 import MotionProvider from "@/components/ui/MotionProvider";
-import PerformanceHUD from "@/components/ui/PerformanceHUD";
 import "./globals.css";
 
 // Serif editorial de alta costura (titulares y énfasis en cursiva)
@@ -77,7 +76,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <div className="relative w-full overflow-x-clip min-h-screen">
             {children}
           </div>
-          <PerformanceHUD />
         </MotionProvider>
       </body>
     </html>

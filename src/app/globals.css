@@ -151,7 +151,6 @@
   -webkit-animation: eq 1s ease-in-out infinite;
   transform-origin: bottom center;
   -webkit-transform-origin: bottom center;
-  will-change: transform;
 }
 
 .animate-beat {
@@ -159,7 +158,6 @@
   -webkit-animation: beat 1.2s ease-out infinite;
   transform-origin: center;
   -webkit-transform-origin: center;
-  will-change: transform, opacity;
 }
 
 .animate-kenburns {
