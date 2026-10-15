@@ -3,7 +3,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowDownRight, Play, Sparkle } from "lucide-react";
 import Image from "next/image";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { siteConfig } from "@/data/siteConfig";
 import MagneticButton from "@/components/ui/MagneticButton";
 
@@ -26,11 +26,20 @@ function Equalizer({ bars = 5, className = "" }: { bars?: number; className?: st
 
 export default function Hero() {
   const ref = useRef<HTMLElement>(null);
+  const [isDesktop, setIsDesktop] = useState(false);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const imgY = useTransform(scrollYProgress, [0, 1], ["0%", "14%"]);
-  const imgScale = useTransform(scrollYProgress, [0, 1], [1.05, 1.15]);
-  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "-8%"]);
-  const badgeY = useTransform(scrollYProgress, [0, 1], [0, -80]);
+  const desktopImgY = useTransform(scrollYProgress, [0, 1], ["0%", "12%"]);
+  const desktopImgScale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
+  const desktopTextY = useTransform(scrollYProgress, [0, 1], ["0%", "-6%"]);
+  const desktopBadgeY = useTransform(scrollYProgress, [0, 1], [0, -60]);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1024px)");
+    setIsDesktop(mq.matches);
+    const handler = () => setIsDesktop(mq.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
 
   return (
     <section
@@ -47,51 +56,35 @@ export default function Hero() {
 
       <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-8 lg:grid-cols-12 lg:gap-8">
         {/* ---------- Editorial Copy (Mobile-First) ---------- */}
-        <motion.div style={{ y: textY }} className="relative z-10 lg:col-span-7">
-          <motion.p
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.25, ease }}
-            className="mb-6 inline-flex items-center gap-2 rounded-full border border-espresso/10 bg-alabaster/70 px-3.5 py-1.5 text-[0.62rem] font-medium uppercase tracking-[0.22em] text-espresso/80 backdrop-blur sm:mb-8 sm:px-4 sm:py-2 sm:text-[0.7rem]"
-          >
+        <motion.div
+          style={{ y: isDesktop ? desktopTextY : 0 }}
+          className="relative z-10 lg:col-span-7"
+        >
+          <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-espresso/10 bg-alabaster/70 px-3.5 py-1.5 text-[0.62rem] font-medium uppercase tracking-[0.22em] text-espresso/80 backdrop-blur sm:mb-8 sm:px-4 sm:py-2 sm:text-[0.7rem]">
             {hero.locationTag}
-          </motion.p>
+          </p>
 
           <h1 className="text-[2.65rem] leading-[0.96] tracking-[-0.04em] text-espresso min-[380px]:text-[3rem] min-[440px]:text-[3.5rem] sm:text-7xl lg:text-[5.4rem] xl:text-[6.2rem]">
             {hero.headline.map((seg, i) => (
-              <span key={i} className="inline-block overflow-hidden pb-[0.06em] align-bottom">
-                <motion.span
-                  initial={{ y: "110%" }}
-                  animate={{ y: "0%" }}
-                  transition={{ duration: 1.1, delay: 0.35 + i * 0.1, ease }}
-                  className={
-                    seg.style === "serif"
-                      ? "inline-block pr-[0.14em] font-serif text-[1.12em] font-normal italic tracking-[-0.02em] text-clay"
-                      : "inline-block pr-[0.18em] font-light"
-                  }
-                >
-                  {seg.text}
-                </motion.span>
+              <span
+                key={i}
+                className={
+                  seg.style === "serif"
+                    ? "inline-block pr-[0.14em] font-serif text-[1.12em] font-normal italic tracking-[-0.02em] text-clay"
+                    : "inline-block pr-[0.18em] font-light"
+                }
+              >
+                {seg.text}{" "}
               </span>
             ))}
           </h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.85, ease }}
-            className="mt-6 max-w-lg text-[0.98rem] leading-relaxed text-warmstone sm:mt-8 sm:text-lg"
-          >
+          <p className="mt-6 max-w-lg text-[0.98rem] leading-relaxed text-warmstone sm:mt-8 sm:text-lg">
             {hero.subtitle}
-          </motion.p>
+          </p>
 
           {/* CTAs: Stacked full-width on mobile, horizontal on desktop */}
-          <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 1, ease }}
-            className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:items-center"
-          >
+          <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:items-center">
             <MagneticButton
               href={hero.primaryCta.href}
               id="hero-cta-primary"
@@ -112,15 +105,10 @@ export default function Hero() {
               </span>
               {hero.secondaryCta.label}
             </MagneticButton>
-          </motion.div>
+          </div>
 
           {/* Quick Metrics */}
-          <motion.dl
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1.2 }}
-            className="mt-10 grid max-w-md grid-cols-3 divide-x divide-espresso/10 border-t border-espresso/10 pt-5 sm:mt-14 sm:pt-6"
-          >
+          <dl className="mt-10 grid max-w-md grid-cols-3 divide-x divide-espresso/10 border-t border-espresso/10 pt-5 sm:mt-14 sm:pt-6">
             {hero.stats.map((s) => (
               <div key={s.label} className="px-3 first:pl-0 sm:px-4">
                 <dt className="sr-only">{s.label}</dt>
@@ -130,18 +118,19 @@ export default function Hero() {
                 </dd>
               </div>
             ))}
-          </motion.dl>
+          </dl>
         </motion.div>
 
         {/* ---------- Editorial Arched Portrait (Mobile Optimized) ---------- */}
         <div className="relative mx-auto w-full max-w-sm sm:max-w-md lg:col-span-5 lg:max-w-none">
-          <motion.div
-            initial={{ clipPath: "inset(100% 0% 0% 0%)" }}
-            animate={{ clipPath: "inset(0% 0% 0% 0%)" }}
-            transition={{ duration: 1.5, delay: 0.3, ease }}
-            className="relative aspect-[4/5] w-full overflow-hidden rounded-t-[999px] rounded-b-[2rem] bg-sand shadow-[0_30px_70px_-25px_rgba(28,25,23,0.35)] sm:rounded-b-[2.5rem] lg:aspect-[3/4]"
-          >
-            <motion.div style={{ y: imgY, scale: imgScale }} className="absolute inset-0">
+          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-t-[999px] rounded-b-[2rem] bg-sand shadow-[0_30px_70px_-25px_rgba(28,25,23,0.35)] sm:rounded-b-[2.5rem] lg:aspect-[3/4]">
+            <motion.div
+              style={{
+                y: isDesktop ? desktopImgY : 0,
+                scale: isDesktop ? desktopImgScale : 1,
+              }}
+              className="absolute inset-0"
+            >
               {hero.video ? (
                 <video
                   className="h-full w-full object-cover"
@@ -165,14 +154,11 @@ export default function Hero() {
               )}
             </motion.div>
             <div className="absolute inset-0 bg-gradient-to-t from-espresso/35 via-transparent to-transparent" />
-          </motion.div>
+          </div>
 
           {/* Spinning Badge: positioned safely inside bounds on mobile */}
           <motion.div
-            style={{ y: badgeY }}
-            initial={{ opacity: 0, scale: 0.6 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.9, delay: 1.2, ease }}
+            style={{ y: isDesktop ? desktopBadgeY : 0 }}
             className="absolute -left-2 top-6 h-24 w-24 sm:-left-8 sm:top-10 sm:h-32 sm:w-32 lg:-left-12"
           >
             <div className="relative h-full w-full rounded-full bg-alabaster/85 shadow-lg backdrop-blur-md">

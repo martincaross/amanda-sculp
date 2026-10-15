@@ -42,9 +42,9 @@ export default function Method() {
           ))}
         </div>
 
-        <Reveal className="mt-12 sm:mt-20">
+        <div className="mt-12 sm:mt-20">
           <ClassVibePreview />
-        </Reveal>
+        </div>
       </div>
     </section>
   );

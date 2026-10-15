@@ -16,8 +16,7 @@ const socials = [
 export default function Contact() {
   return (
     <section id="connect" aria-labelledby="connect-title" className="relative px-3 py-14 sm:px-6 sm:py-24">
-      <Reveal>
-        <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[2rem] bg-espresso p-3 sm:rounded-[2.75rem] sm:p-5">
+      <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[2rem] bg-espresso p-3 sm:rounded-[2.75rem] sm:p-5">
           {/* Ambient Lighting Halos */}
           <div aria-hidden="true" className="pointer-events-none absolute inset-0">
             <div className="absolute -left-20 top-0 h-96 w-96 rounded-full bg-clay/25 blur-[130px]" />
@@ -94,7 +93,6 @@ export default function Contact() {
             </div>
           </div>
         </div>
-      </Reveal>
     </section>
   );
 }

@@ -26,18 +26,13 @@ export default function Navbar() {
 
   return (
     <>
-      <motion.header
-        initial={{ y: -30, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 1, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-        className="fixed inset-x-0 top-0 z-50 flex justify-center px-3 pt-2.5 sm:px-6 sm:pt-5"
-      >
+      <header className="fixed inset-x-0 top-0 z-50 flex justify-center px-3 pt-2.5 sm:px-6 sm:pt-5">
         <nav
           aria-label="Main"
-          className={`flex w-full max-w-6xl items-center justify-between rounded-full border py-2 pl-5 pr-2 transition-all duration-700 ease-editorial sm:pl-6 ${
+          className={`flex w-full max-w-6xl items-center justify-between rounded-full border py-2 pl-5 pr-2 transition-all duration-500 ease-editorial sm:pl-6 ${
             scrolled
-              ? "border-espresso/10 bg-alabaster/75 shadow-[0_10px_40px_-15px_rgba(28,25,23,0.25)] backdrop-blur-xl"
-              : "border-transparent bg-alabaster/35 backdrop-blur-md"
+              ? "border-espresso/10 bg-alabaster/85 shadow-[0_10px_40px_-15px_rgba(28,25,23,0.2)] backdrop-blur-md"
+              : "border-transparent bg-alabaster/40 backdrop-blur-sm"
           }`}
         >
           <a
@@ -85,7 +80,7 @@ export default function Navbar() {
             </button>
           </div>
         </nav>
-      </motion.header>
+      </header>
 
       {/* Fullscreen Mobile Drawer with radial reveal */}
       <AnimatePresence>
