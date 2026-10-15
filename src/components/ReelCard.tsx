@@ -69,7 +69,7 @@ export default function ReelCard({ reel, index }: { reel: Reel; index: number })
               src={reel.poster}
               alt={`${reel.classStyle} — ${reel.title}`}
               fill
-              loading="eager"
+              loading={index < 2 ? "eager" : "lazy"}
               priority={index < 2}
               sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 85vw"
               className="object-cover"

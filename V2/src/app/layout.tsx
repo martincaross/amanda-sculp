@@ -71,9 +71,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <link rel="preload" as="image" href="/images/reel-01.webp" type="image/webp" />
         <link rel="preload" as="image" href="/images/about-portrait.webp" type="image/webp" />
       </head>
-      <body className="min-h-full bg-alabaster font-sans text-espresso">
+      <body className="min-h-full bg-alabaster font-sans text-espresso overflow-x-hidden">
         <MotionProvider>
-          <div className="relative w-full overflow-x-clip min-h-screen">
+          <div className="relative w-full min-h-screen">
             {children}
           </div>
         </MotionProvider>

@@ -17,7 +17,11 @@ function Equalizer({ bars = 5, className = "" }: { bars?: number; className?: st
         <span
           key={i}
           className="block h-full w-[3px] origin-bottom animate-eq rounded-full bg-current"
-          style={{ animationDelay: `${i * 0.13}s`, animationDuration: `${0.8 + (i % 3) * 0.18}s` }}
+          style={{
+            ["--eq-dur" as string]: `${0.8 + (i % 3) * 0.18}s`,
+            ["--eq-delay" as string]: `${i * 0.13}s`,
+            ["--eq-play" as string]: "running",
+          }}
         />
       ))}
     </span>

@@ -166,9 +166,9 @@ export default function ClassVibePreview() {
                     height: `${h}%`,
                     backgroundColor: i % 6 === 0 ? track.accent : "rgba(249,246,240,0.85)",
                     opacity: 0.35 + (h / 100) * 0.65,
-                    animationDuration: `${beatSec * (i % 4 === 0 ? 1.4 : i % 3 === 0 ? 1.8 : 1.1)}s`,
-                    animationDelay: `${(i * 0.09) % 1.2}s`,
-                    animationPlayState: playing ? "running" : "paused",
+                    ["--eq-dur" as string]: `${beatSec * (i % 4 === 0 ? 1.4 : i % 3 === 0 ? 1.8 : 1.1)}s`,
+                    ["--eq-delay" as string]: `${(i * 0.09) % 1.2}s`,
+                    ["--eq-play" as string]: playing ? "running" : "paused",
                   }}
                 />
               </div>

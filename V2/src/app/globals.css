@@ -52,17 +52,21 @@
 @keyframes eq {
   0%, 100% {
     transform: scaleY(0.2);
+    -webkit-transform: scaleY(0.2);
   }
   50% {
     transform: scaleY(1);
+    -webkit-transform: scaleY(1);
   }
 }
 @-webkit-keyframes eq {
   0%, 100% {
     -webkit-transform: scaleY(0.2);
+    transform: scaleY(0.2);
   }
   50% {
     -webkit-transform: scaleY(1);
+    transform: scaleY(1);
   }
 }
 
@@ -147,8 +151,18 @@
 }
 
 .animate-eq {
-  animation: eq 1s ease-in-out infinite;
-  -webkit-animation: eq 1s ease-in-out infinite;
+  animation-name: eq;
+  -webkit-animation-name: eq;
+  animation-duration: var(--eq-dur, 1s);
+  -webkit-animation-duration: var(--eq-dur, 1s);
+  animation-delay: var(--eq-delay, 0s);
+  -webkit-animation-delay: var(--eq-delay, 0s);
+  animation-play-state: var(--eq-play, running);
+  -webkit-animation-play-state: var(--eq-play, running);
+  animation-timing-function: ease-in-out;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: infinite;
   transform-origin: bottom center;
   -webkit-transform-origin: bottom center;
 }
@@ -229,8 +243,6 @@ section[id] {
     display: none;
   }
   .safari-gpu-fix {
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
   }
@@ -249,21 +261,13 @@ section[id] {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
   html {
     scroll-behavior: auto !important;
   }
   .animate-marquee,
   .animate-spin-slow,
   .animate-kenburns {
-    animation: none !important;
-    -webkit-animation: none !important;
+    animation-play-state: paused !important;
+    -webkit-animation-play-state: paused !important;
   }
 }
