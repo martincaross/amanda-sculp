@@ -66,6 +66,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       style={themeVars}
       className={`${cormorant.variable} ${jakarta.variable} antialiased`}
     >
+      <head>
+        <link rel="preload" as="image" href="/images/hero-sculpt.webp" type="image/webp" />
+        <link rel="preload" as="image" href="/images/reel-01.webp" type="image/webp" />
+        <link rel="preload" as="image" href="/images/about-portrait.webp" type="image/webp" />
+      </head>
       <body className="min-h-full overflow-x-clip bg-alabaster font-sans text-espresso">
         <MotionProvider>{children}</MotionProvider>
       </body>

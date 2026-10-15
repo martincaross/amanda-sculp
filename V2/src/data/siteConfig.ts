@@ -72,7 +72,7 @@ export const siteConfig = {
       "High-energy, beat-driven Sculpt classes in Los Angeles. Private 1:1 sessions, studio takeovers, masterclasses, and brand partnerships.",
     // 🔁 Replace with your live domain once connected (e.g. https://amanda-sculpt.vercel.app)
     url: "https://amandasculpt.com",
-    ogImage: "/images/hero-sculpt.jpg",
+    ogImage: "/images/hero-sculpt.webp",
   },
 
   /* --------------------------------------------------------------------------
@@ -150,7 +150,7 @@ export const siteConfig = {
     primaryCta: { label: "Book Your Session", href: "#connect" },
     secondaryCta: { label: "Watch Class in Motion", href: "#in-motion" },
     // 🖼️ Main editorial portrait
-    image: "/images/hero-sculpt.jpg",
+    image: "/images/hero-sculpt.webp",
     imageAlt: "Amanda holding light hand weights in a lunge inside a sunlit Los Angeles studio",
     // 🎬 OPTIONAL: looping background video. Leave empty ("") to display the still image.
     //    Example: "/videos/hero-loop.mp4" (MP4 H.264, < 8MB recommended)
@@ -258,7 +258,7 @@ export const siteConfig = {
         title: "Squat pulses on the 8-count",
         classStyle: "Full Body Sculpt",
         bpm: 128,
-        poster: "/images/reel-01.jpg",
+        poster: "/images/reel-01.webp",
         video: "", // 🎬 e.g.: "/videos/reel-01.mp4"
         tiktokUrl: "https://www.tiktok.com/@amanda.sculpt",
       },
@@ -267,7 +267,7 @@ export const siteConfig = {
         title: "Sustained bridge series",
         classStyle: "Glute Burn",
         bpm: 122,
-        poster: "/images/reel-02.jpg",
+        poster: "/images/reel-02.webp",
         video: "", // 🎬 e.g.: "/videos/reel-02.mp4"
         tiktokUrl: "https://www.tiktok.com/@amanda.sculpt",
       },
@@ -276,7 +276,7 @@ export const siteConfig = {
         title: "Arm series & tempo drop",
         classStyle: "Sculpt Finisher",
         bpm: 132,
-        poster: "/images/reel-03.jpg",
+        poster: "/images/reel-03.webp",
         video: "", // 🎬 e.g.: "/videos/reel-03.mp4"
         tiktokUrl: "https://www.tiktok.com/@amanda.sculpt",
       },
@@ -285,7 +285,7 @@ export const siteConfig = {
         title: "Sunset rooftop core flow",
         classStyle: "Core Flow",
         bpm: 116,
-        poster: "/images/reel-04.jpg",
+        poster: "/images/reel-04.webp",
         video: "", // 🎬 e.g.: "/videos/reel-04.mp4"
         tiktokUrl: "https://www.tiktok.com/@amanda.sculpt",
       },
@@ -307,12 +307,12 @@ export const siteConfig = {
     signature: "— Amanda",
     certifications: ["Certified Sculpt & Barre", "Comprehensive Mat Pilates", "Pre & Postnatal Movement"],
     gallery: [
-      { type: "image", src: "/images/about-portrait.jpg", alt: "Amanda relaxing at her Silver Lake home", caption: "Home · Silver Lake", span: "tall" },
-      { type: "image", src: "/images/life-canyon.jpg", alt: "Amanda hiking above the Los Angeles skyline at sunrise", caption: "Runyon Canyon · 6:40 am", span: "tall" },
-      { type: "image", src: "/images/life-studio.jpg", alt: "Amanda curating the class playlist before teaching", caption: "Pre-class · The playlist is sacred", span: "wide" },
-      { type: "image", src: "/images/life-matcha.jpg", alt: "Iced matcha latte on travertine table in a sunlit cafe", caption: "Morning ritual · Iced matcha", span: "square" },
+      { type: "image", src: "/images/about-portrait.webp", alt: "Amanda relaxing at her Silver Lake home", caption: "Home · Silver Lake", span: "tall" },
+      { type: "image", src: "/images/life-canyon.webp", alt: "Amanda hiking above the Los Angeles skyline at sunrise", caption: "Runyon Canyon · 6:40 am", span: "tall" },
+      { type: "image", src: "/images/life-studio.webp", alt: "Amanda curating the class playlist before teaching", caption: "Pre-class · The playlist is sacred", span: "wide" },
+      { type: "image", src: "/images/life-matcha.webp", alt: "Iced matcha latte on travertine table in a sunlit cafe", caption: "Morning ritual · Iced matcha", span: "square" },
       { type: "quote", text: "Discipline just sounds better with great music.", author: "Amanda" },
-      { type: "image", src: "/images/life-malibu.jpg", alt: "Amanda walking barefoot along Malibu beach at sunset", caption: "Malibu · Golden hour", span: "wide" },
+      { type: "image", src: "/images/life-malibu.webp", alt: "Amanda walking barefoot along Malibu beach at sunset", caption: "Malibu · Golden hour", span: "wide" },
       { type: "social", network: "instagram" },
       { type: "social", network: "tiktok" },
     ] as GalleryItem[],

@@ -97,12 +97,13 @@ function Tile({ item, index }: { item: GalleryItem; index: number }) {
 
   if (item.type === "image") {
     return (
-      <div className={`h-full w-full ${containerClasses}`}>
+      <div className={`w-full md:h-full ${containerClasses}`}>
         <BentoImage
           src={item.src}
           alt={item.alt}
           caption={item.caption}
           className="h-full w-full"
+          priority={index < 2}
           sizes={item.span === "wide" ? "(min-width: 768px) 50vw, 100vw" : "(min-width: 768px) 25vw, 50vw"}
         />
       </div>
@@ -111,7 +112,7 @@ function Tile({ item, index }: { item: GalleryItem; index: number }) {
 
   if (item.type === "quote") {
     return (
-      <div className={`h-full w-full ${containerClasses}`}>
+      <div className={`w-full md:h-full ${containerClasses}`}>
         <blockquote className="flex h-full w-full flex-col justify-between overflow-hidden rounded-[1.5rem] bg-clay p-3.5 text-alabaster sm:rounded-[1.75rem] sm:p-5 md:p-6">
           <Quote className="h-4 w-4 fill-current opacity-60 sm:h-6 sm:w-6" />
           <p className="font-serif text-sm italic leading-[1.18] sm:text-lg md:text-xl lg:text-2xl">
@@ -126,7 +127,7 @@ function Tile({ item, index }: { item: GalleryItem; index: number }) {
   }
 
   return (
-    <div className={`h-full w-full ${containerClasses}`}>
+    <div className={`w-full md:h-full ${containerClasses}`}>
       <SocialTile network={item.network} />
     </div>
   );

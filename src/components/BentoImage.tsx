@@ -10,6 +10,7 @@ type BentoImageProps = {
   caption: string;
   className?: string;
   sizes?: string;
+  priority?: boolean;
 };
 
 /** Photo tile with subtle scroll parallax and editorial caption badge */
@@ -19,6 +20,7 @@ export default function BentoImage({
   caption,
   className = "",
   sizes = "(min-width: 768px) 25vw, 50vw",
+  priority = false,
 }: BentoImageProps) {
   const ref = useRef<HTMLElement>(null);
   const [isDesktop, setIsDesktop] = useState(false);
@@ -40,12 +42,14 @@ export default function BentoImage({
     >
       <motion.div
         style={{ y: isDesktop ? desktopY : 0 }}
-        className="absolute -inset-y-[6%] inset-x-0"
+        className="absolute inset-0 md:-inset-y-[6%]"
       >
         <Image
           src={src}
           alt={alt}
           fill
+          priority={priority}
+          loading="eager"
           sizes={sizes}
           className="object-cover transition-transform duration-[1.4s] ease-editorial group-hover:scale-[1.05]"
         />
