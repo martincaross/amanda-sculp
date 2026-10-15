@@ -13,7 +13,6 @@ type Status = "idle" | "loading" | "success" | "error";
 
 const initialValues = { name: "", email: "", social: "", message: "" };
 
-/** Checks whether Web3Forms or Formspree has been activated with a real key */
 function isConfigured() {
   if (form.provider === "formspree") return /formspree\.io\/f\/(?!YOUR)/i.test(form.endpoint);
   return Boolean(form.accessKey) && !form.accessKey.startsWith("YOUR_");
@@ -30,7 +29,6 @@ export default function ContactForm() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
-    // Honeypot anti-spam check
     if (fd.get("botcheck")) return setStatus("success");
 
     setStatus("loading");
@@ -39,7 +37,6 @@ export default function ContactForm() {
     try {
       if (!isConfigured()) {
         if (process.env.NODE_ENV !== "production") {
-          // Demo fallback in development so you can demonstrate the submission live
           console.warn("[ContactForm] Demo mode active. Configure accessKey in siteConfig.ts to receive live emails.");
           await new Promise((r) => setTimeout(r, 1200));
           setStatus("success");
@@ -89,13 +86,12 @@ export default function ContactForm() {
     }
   };
 
-  // Base font size is 16px (text-base) to prevent iOS Safari auto-zooming on focus
   const inputClass =
     "peer w-full border-0 border-b border-espresso/15 bg-transparent px-0 pb-3 pt-2 text-base text-espresso placeholder:text-warmstone/50 transition-colors duration-500 focus:border-clay focus:outline-none focus:ring-0 sm:text-lg";
   const labelClass = "text-[0.62rem] font-medium uppercase tracking-[0.22em] text-warmstone sm:text-[0.65rem]";
 
   return (
-    <div className="relative min-h-[34rem] rounded-[1.75rem] bg-alabaster p-5 sm:rounded-[2rem] sm:p-10">
+    <div className="relative rounded-[1.75rem] bg-alabaster p-5 sm:rounded-[2rem] sm:p-10">
       <AnimatePresence mode="wait">
         {status === "success" ? (
           <motion.div
@@ -104,7 +100,7 @@ export default function ContactForm() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.6, ease }}
-            className="flex min-h-[30rem] flex-col items-center justify-center text-center sm:min-h-[32rem]"
+            className="flex min-h-[26rem] flex-col items-center justify-center text-center sm:min-h-[32rem]"
             role="status"
           >
             <motion.span
@@ -134,9 +130,9 @@ export default function ContactForm() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.6, ease }}
-            className="space-y-7 sm:space-y-9"
+            className="space-y-6 sm:space-y-9"
           >
-            {/* Inquiry Pills (Mobile: fluid wrap with touch padding) */}
+            {/* Inquiry Pills (Safe Mobile Wrap) */}
             <fieldset>
               <legend className={labelClass}>{contact.inquiryLabel}</legend>
               <div className="mt-3 flex flex-wrap gap-2 sm:mt-4" role="radiogroup">
@@ -170,7 +166,7 @@ export default function ContactForm() {
               </div>
             </fieldset>
 
-            <div className="grid gap-7 sm:grid-cols-2 sm:gap-6 sm:space-y-0">
+            <div className="grid gap-6 sm:grid-cols-2 sm:gap-6">
               <label className="block">
                 <span className={labelClass}>{contact.fields.name.label} *</span>
                 <input

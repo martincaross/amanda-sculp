@@ -22,14 +22,14 @@ export default function BentoImage({
 }: BentoImageProps) {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], ["-6%", "6%"]);
+  const y = useTransform(scrollYProgress, [0, 1], ["-5%", "5%"]);
 
   return (
     <figure
       ref={ref}
-      className={`group relative overflow-hidden rounded-[1.5rem] bg-sand sm:rounded-[1.75rem] ${className}`}
+      className={`group relative h-full w-full overflow-hidden rounded-[1.5rem] bg-sand sm:rounded-[1.75rem] ${className}`}
     >
-      <motion.div style={{ y }} className="absolute -inset-y-[8%] inset-x-0">
+      <motion.div style={{ y }} className="absolute -inset-y-[6%] inset-x-0">
         <Image
           src={src}
           alt={alt}
