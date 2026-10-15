@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { siteConfig } from "@/data/siteConfig";
@@ -10,11 +10,23 @@ import { InstagramIcon, TikTokIcon } from "@/components/ui/SocialIcons";
 const { brand, nav, social } = siteConfig;
 
 export default function Navbar() {
-  const { scrollY } = useScroll();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
-  useMotionValueEvent(scrollY, "change", (v) => setScrolled(v > 30));
+  useEffect(() => {
+    let ticking = false;
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 30);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   // Lock body scroll when mobile menu is active
   useEffect(() => {
@@ -31,8 +43,8 @@ export default function Navbar() {
           aria-label="Main"
           className={`flex w-full max-w-6xl items-center justify-between rounded-full border py-2 pl-5 pr-2 transition-all duration-500 ease-editorial sm:pl-6 ${
             scrolled
-              ? "border-espresso/10 bg-alabaster/85 shadow-[0_10px_40px_-15px_rgba(28,25,23,0.2)] backdrop-blur-md"
-              : "border-transparent bg-alabaster/40 backdrop-blur-sm"
+              ? "border-espresso/10 bg-alabaster/95 shadow-[0_10px_40px_-15px_rgba(28,25,23,0.2)] md:bg-alabaster/85 md:backdrop-blur-md"
+              : "border-transparent bg-alabaster/80 md:bg-alabaster/40 md:backdrop-blur-sm"
           }`}
         >
           <a

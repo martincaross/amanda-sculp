@@ -37,12 +37,13 @@ export default function ClassVibePreview() {
       id="class-vibe-preview"
       className="relative overflow-hidden rounded-[1.75rem] bg-espresso text-alabaster shadow-[0_40px_90px_-35px_rgba(28,25,23,0.6)] sm:rounded-[2.5rem]"
     >
-      {/* Dynamic ambient color glow */}
+      {/* Dynamic ambient color glow (Radial gradient on mobile to eliminate blur overhead) */}
       <motion.div
         aria-hidden="true"
-        animate={{ backgroundColor: track.accent }}
-        transition={{ duration: 1.2 }}
-        className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full opacity-25 blur-[120px]"
+        animate={{ opacity: [0.2, 0.35, 0.2] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        className="pointer-events-none absolute -right-20 -top-20 h-80 w-80 rounded-full sm:-right-32 sm:-top-32 sm:h-96 sm:w-96 sm:blur-[120px]"
+        style={{ background: `radial-gradient(circle, ${track.accent} 0%, transparent 70%)` }}
       />
 
       <div className="relative grid lg:grid-cols-5">

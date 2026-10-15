@@ -48,10 +48,16 @@ export default function Hero() {
       aria-label="Hero"
       className="relative isolate overflow-hidden pb-14 pt-24 sm:pt-32 lg:min-h-[100svh] lg:pb-12"
     >
-      {/* Warm ambient halos */}
+      {/* Warm ambient halos (Pure GPU radial gradients with 0 blur overhead) */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -left-32 top-8 h-[24rem] w-[24rem] rounded-full bg-clay/15 blur-[100px] sm:h-[34rem] sm:w-[34rem] sm:blur-[130px]" />
-        <div className="absolute -right-20 bottom-0 h-[22rem] w-[22rem] rounded-full bg-sage/20 blur-[100px] sm:h-[28rem] sm:w-[28rem] sm:blur-[120px]" />
+        <div
+          className="absolute -left-32 top-8 h-[24rem] w-[24rem] rounded-full opacity-70 sm:h-[34rem] sm:w-[34rem]"
+          style={{ background: "radial-gradient(circle, rgba(200,125,85,0.22) 0%, transparent 70%)" }}
+        />
+        <div
+          className="absolute -right-20 bottom-0 h-[22rem] w-[22rem] rounded-full opacity-70 sm:h-[28rem] sm:w-[28rem]"
+          style={{ background: "radial-gradient(circle, rgba(138,154,134,0.25) 0%, transparent 70%)" }}
+        />
       </div>
 
       <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-8 lg:grid-cols-12 lg:gap-8">
@@ -60,7 +66,7 @@ export default function Hero() {
           style={{ y: isDesktop ? desktopTextY : 0 }}
           className="relative z-10 lg:col-span-7"
         >
-          <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-espresso/10 bg-alabaster/70 px-3.5 py-1.5 text-[0.62rem] font-medium uppercase tracking-[0.22em] text-espresso/80 backdrop-blur sm:mb-8 sm:px-4 sm:py-2 sm:text-[0.7rem]">
+          <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-espresso/10 bg-alabaster/95 px-3.5 py-1.5 text-[0.62rem] font-medium uppercase tracking-[0.22em] text-espresso/80 sm:mb-8 sm:bg-alabaster/70 sm:backdrop-blur sm:px-4 sm:py-2 sm:text-[0.7rem]">
             {hero.locationTag}
           </p>
 
@@ -161,7 +167,7 @@ export default function Hero() {
             style={{ y: isDesktop ? desktopBadgeY : 0 }}
             className="absolute -left-2 top-6 h-24 w-24 sm:-left-8 sm:top-10 sm:h-32 sm:w-32 lg:-left-12"
           >
-            <div className="relative h-full w-full rounded-full bg-alabaster/85 shadow-lg backdrop-blur-md">
+            <div className="relative h-full w-full rounded-full bg-alabaster shadow-md sm:bg-alabaster/85 sm:backdrop-blur-md">
               <svg viewBox="0 0 100 100" className="absolute inset-0 h-full w-full animate-spin-slow" aria-hidden="true">
                 <defs>
                   <path id="hero-badge-path" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0" />
@@ -179,7 +185,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 1.35, ease }}
-            className="absolute -bottom-4 right-1 flex items-center gap-3 rounded-2xl border border-alabaster/50 bg-alabaster/80 p-2.5 pr-4 shadow-[0_15px_40px_-15px_rgba(28,25,23,0.35)] backdrop-blur-xl sm:-bottom-6 sm:right-6 sm:gap-4 sm:p-3 sm:pr-5 lg:-right-6"
+            className="absolute -bottom-4 right-1 flex items-center gap-3 rounded-2xl border border-espresso/10 bg-alabaster/95 p-2.5 pr-4 shadow-[0_15px_40px_-15px_rgba(28,25,23,0.35)] sm:-bottom-6 sm:right-6 sm:gap-4 sm:p-3 sm:pr-5 sm:border-alabaster/50 sm:bg-alabaster/80 sm:backdrop-blur-xl lg:-right-6"
           >
             <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-espresso text-clay sm:h-12 sm:w-12">
               <Equalizer />

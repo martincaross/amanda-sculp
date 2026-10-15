@@ -17,10 +17,16 @@ export default function Contact() {
   return (
     <section id="connect" aria-labelledby="connect-title" className="relative px-3 py-14 sm:px-6 sm:py-24">
       <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[2rem] bg-espresso p-3 sm:rounded-[2.75rem] sm:p-5">
-          {/* Ambient Lighting Halos */}
+          {/* Ambient Lighting Halos (Pure GPU radial gradients with 0 blur overhead) */}
           <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-            <div className="absolute -left-20 top-0 h-96 w-96 rounded-full bg-clay/25 blur-[130px]" />
-            <div className="absolute bottom-0 left-1/3 h-72 w-72 rounded-full bg-sage/20 blur-[120px]" />
+            <div
+              className="absolute -left-20 top-0 h-96 w-96 rounded-full opacity-60 sm:opacity-80 sm:blur-[130px]"
+              style={{ background: "radial-gradient(circle, rgba(200,125,85,0.28) 0%, transparent 70%)" }}
+            />
+            <div
+              className="absolute bottom-0 left-1/3 h-72 w-72 rounded-full opacity-50 sm:opacity-70 sm:blur-[120px]"
+              style={{ background: "radial-gradient(circle, rgba(138,154,134,0.25) 0%, transparent 70%)" }}
+            />
           </div>
 
           <div className="relative grid gap-4 lg:grid-cols-12">
