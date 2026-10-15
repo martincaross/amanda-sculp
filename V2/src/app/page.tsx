@@ -6,12 +6,10 @@ import MovementGallery from "@/components/MovementGallery";
 import Lifestyle from "@/components/Lifestyle";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import Preloader from "@/components/ui/Preloader";
 
 export default function Home() {
   return (
     <>
-      <Preloader />
       <Navbar />
       <main>
         <Hero />

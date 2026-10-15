@@ -1,36 +1,19 @@
-"use client";
+import type { HTMLAttributes, ReactNode } from "react";
 
-import { motion, type HTMLMotionProps } from "framer-motion";
-import { type ReactNode, useEffect, useState } from "react";
-
-type RevealProps = HTMLMotionProps<"div"> & {
+type RevealProps = HTMLAttributes<HTMLDivElement> & {
   children: ReactNode;
   delay?: number;
   y?: number;
 };
 
-/** Aparición editorial al hacer scroll: fade + desplazamiento. En móvil se renderiza directo para evitar carga a cachos. */
-export default function Reveal({ children, delay = 0, y = 14, ...rest }: RevealProps) {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(max-width: 767px)");
-    setIsMobile(mq.matches);
-    const handler = () => setIsMobile(mq.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, []);
-
+/**
+ * Renderizado nativo y fluido: todo el contenido es 100% visible desde el primer
+ * milisegundo, eliminando el efecto de "carga a pedazos" durante el scroll.
+ */
+export default function Reveal({ children, delay, y, className = "", ...rest }: RevealProps) {
   return (
-    <motion.div
-      initial={isMobile ? false : { opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "200px 0px 200px 0px" }}
-      transition={{ duration: 0.45, delay: isMobile ? 0 : Math.min(delay, 0.2), ease: [0.22, 1, 0.36, 1] }}
-      style={{ willChange: isMobile ? undefined : "transform, opacity" }}
-      {...rest}
-    >
+    <div className={className} {...rest}>
       {children}
-    </motion.div>
+    </div>
   );
 }

@@ -181,12 +181,7 @@ export default function Hero() {
           </motion.div>
 
           {/* "Now Teaching" Pill: mobile-compact & beat-synced */}
-          <motion.div
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 1.35, ease }}
-            className="absolute -bottom-4 right-1 flex items-center gap-3 rounded-2xl border border-espresso/10 bg-alabaster/95 p-2.5 pr-4 shadow-[0_15px_40px_-15px_rgba(28,25,23,0.35)] sm:-bottom-6 sm:right-6 sm:gap-4 sm:p-3 sm:pr-5 sm:border-alabaster/50 sm:bg-alabaster/80 sm:backdrop-blur-xl lg:-right-6"
-          >
+          <div className="absolute -bottom-4 right-1 flex items-center gap-3 rounded-2xl border border-espresso/10 bg-alabaster/95 p-2.5 pr-4 shadow-[0_15px_40px_-15px_rgba(28,25,23,0.35)] sm:-bottom-6 sm:right-6 sm:gap-4 sm:p-3 sm:pr-5 sm:border-alabaster/50 sm:bg-alabaster/80 sm:backdrop-blur-xl lg:-right-6">
             <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-espresso text-clay sm:h-12 sm:w-12">
               <Equalizer />
             </span>
@@ -207,7 +202,7 @@ export default function Hero() {
                 <span className="ml-1 text-[0.55rem] font-medium tracking-widest text-warmstone sm:text-[0.6rem]">BPM</span>
               </span>
             </span>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
