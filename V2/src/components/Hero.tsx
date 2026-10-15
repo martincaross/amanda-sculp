@@ -16,7 +16,7 @@ function Equalizer({ bars = 5, className = "" }: { bars?: number; className?: st
       {Array.from({ length: bars }).map((_, i) => (
         <span
           key={i}
-          className="h-full w-[3px] origin-bottom animate-eq rounded-full bg-current"
+          className="block h-full w-[3px] origin-bottom animate-eq rounded-full bg-current"
           style={{ animationDelay: `${i * 0.13}s`, animationDuration: `${0.8 + (i % 3) * 0.18}s` }}
         />
       ))}

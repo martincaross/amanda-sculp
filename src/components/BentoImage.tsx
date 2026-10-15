@@ -2,7 +2,7 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type BentoImageProps = {
   src: string;
@@ -21,15 +21,27 @@ export default function BentoImage({
   sizes = "(min-width: 768px) 25vw, 50vw",
 }: BentoImageProps) {
   const ref = useRef<HTMLElement>(null);
+  const [isDesktop, setIsDesktop] = useState(false);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], ["-5%", "5%"]);
+  const desktopY = useTransform(scrollYProgress, [0, 1], ["-5%", "5%"]);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)");
+    setIsDesktop(mq.matches);
+    const handler = () => setIsDesktop(mq.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
 
   return (
     <figure
       ref={ref}
       className={`group relative h-full w-full overflow-hidden rounded-[1.5rem] bg-sand sm:rounded-[1.75rem] ${className}`}
     >
-      <motion.div style={{ y }} className="absolute -inset-y-[6%] inset-x-0">
+      <motion.div
+        style={{ y: isDesktop ? desktopY : 0 }}
+        className="absolute -inset-y-[6%] inset-x-0"
+      >
         <Image
           src={src}
           alt={alt}

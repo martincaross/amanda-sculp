@@ -55,15 +55,14 @@ export default function MovementGallery() {
       </div>
 
       {/* Mobile: Smooth Snap Carousel · Desktop: Editorial 4-col staggered grid */}
-      <div className="no-scrollbar mx-auto mt-6 flex max-w-7xl snap-x snap-mandatory gap-3.5 overflow-x-auto px-4 pb-6 sm:mt-14 sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:px-8 lg:grid-cols-4 lg:pb-16">
+      <div className="no-scrollbar mx-auto mt-6 flex max-w-7xl snap-x snap-mandatory gap-3.5 overflow-x-auto px-4 pb-6 [-webkit-overflow-scrolling:touch] sm:mt-14 sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:px-8 lg:grid-cols-4 lg:pb-16">
         {movement.reels.map((reel, i) => (
-          <Reveal
+          <div
             key={reel.id}
-            delay={i * 0.1}
             className={`w-[78vw] shrink-0 snap-center sm:w-auto ${i % 2 === 1 ? "lg:translate-y-14" : ""}`}
           >
             <ReelCard reel={reel} index={i} />
-          </Reveal>
+          </div>
         ))}
       </div>
     </section>

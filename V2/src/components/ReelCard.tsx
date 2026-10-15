@@ -43,10 +43,10 @@ export default function ReelCard({ reel, index }: { reel: Reel; index: number })
   return (
     <motion.div
       ref={cardRef}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      whileHover={{ y: -8 }}
-      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      onMouseEnter={() => !isTouch && setHovered(true)}
+      onMouseLeave={() => !isTouch && setHovered(false)}
+      whileHover={!isTouch ? { y: -8 } : undefined}
+      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
       className="group relative aspect-[9/16] w-full overflow-hidden rounded-[1.75rem] bg-sand shadow-[0_25px_50px_-25px_rgba(28,25,23,0.4)] sm:rounded-[2rem]"
     >
       {/* Media Layer */}

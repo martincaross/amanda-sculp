@@ -154,21 +154,22 @@ export default function ClassVibePreview() {
             </button>
           </div>
 
-          {/* Equalizer Soundwave: overflow contained so mobile displays never horizontal-scroll */}
-          <div className="mt-8 flex h-28 items-center gap-[2px] overflow-hidden sm:mt-10 sm:h-40 sm:gap-1" aria-hidden="true">
+          {/* Equalizer Soundwave: hardware-accelerated block bars for 100% mobile compatibility */}
+          <div className="mt-8 flex h-28 items-end gap-[2px] overflow-hidden sm:mt-10 sm:h-40 sm:gap-1" aria-hidden="true">
             {heights.map((h, i) => (
-              <span
-                key={`${track.id}-${i}`}
-                className="flex-1 origin-center animate-eq rounded-full transition-colors duration-700"
-                style={{
-                  height: `${h}%`,
-                  backgroundColor: i % 6 === 0 ? track.accent : "rgba(249,246,240,0.82)",
-                  opacity: 0.35 + (h / 100) * 0.65,
-                  animationDuration: `${beatSec * (i % 3 === 0 ? 2 : 1)}s`,
-                  animationDelay: `${-(i * beatSec) / 10}s`,
-                  animationPlayState: playing ? "running" : "paused",
-                }}
-              />
+              <div key={`${track.id}-${i}`} className="flex h-full flex-1 items-end">
+                <span
+                  className="block w-full origin-bottom rounded-full animate-eq transition-colors duration-500"
+                  style={{
+                    height: `${h}%`,
+                    backgroundColor: i % 6 === 0 ? track.accent : "rgba(249,246,240,0.85)",
+                    opacity: 0.35 + (h / 100) * 0.65,
+                    animationDuration: `${beatSec * (i % 4 === 0 ? 1.4 : i % 3 === 0 ? 1.8 : 1.1)}s`,
+                    animationDelay: `${-((i * 0.08) % 1.5)}s`,
+                    animationPlayState: playing ? "running" : "paused",
+                  }}
+                />
+              </div>
             ))}
           </div>
 
