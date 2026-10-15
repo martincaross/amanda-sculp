@@ -238,6 +238,18 @@ section[id] {
   }
 }
 
+/*
+ * Eliminación de parpadeo y carga a trompicones en móvil:
+ * En pantallas móviles (< md), los elementos están 100% visibles e interactivos
+ * desde el primer milisegundo, evitando huecos en blanco durante el scroll inercial de WebKit.
+ */
+@media (max-width: 767px) {
+  .reveal-node {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -252,8 +264,6 @@ section[id] {
   }
   .animate-marquee,
   .animate-spin-slow,
-  .animate-eq,
-  .animate-beat,
   .animate-kenburns {
     animation: none !important;
     -webkit-animation: none !important;

@@ -31,7 +31,7 @@ export default function Reveal({
         delay: Math.min(delay, 0.2),
         ease: [0.22, 1, 0.36, 1],
       }}
-      className={className}
+      className={`reveal-node ${className}`}
       {...rest}
     >
       {children}

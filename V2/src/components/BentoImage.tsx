@@ -36,7 +36,7 @@ function DesktopParallaxImage({
         alt={alt}
         fill
         priority={priority}
-        loading="eager"
+        loading={priority ? "eager" : "lazy"}
         sizes={sizes}
         className="object-cover transition-transform duration-[1.4s] ease-editorial group-hover:scale-[1.05]"
       />
@@ -76,7 +76,7 @@ export default function BentoImage({
             alt={alt}
             fill
             priority={priority}
-            loading="eager"
+            loading={priority ? "eager" : "lazy"}
             sizes={sizes}
             className="object-cover"
           />

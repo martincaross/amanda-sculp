@@ -1,3 +1,5 @@
+# Amanda — Concepto & Dirección de Arte
+
 Para que cuando le enseñes el portátil en Los Ángeles se quede sin palabras, tenemos que huir del típico diseño de "plantilla de gimnasio" o de un simple Linktree mejorado.
 
 En Los Ángeles, las marcas personales de fitness y Sculpt más potentes (estilo Forma Pilates, Alo Wellness Club o Bryony Deery) utilizan una estética que se llama "Luxury Editorial Wellness": tonos tierra y neutros cálidos (crema, arena, espresso, verde salvia suave), tipografías que mezclan una Serif elegante (como de revista de moda) con una Sans-Serif súper limpia, animaciones fluidas al hacer scroll y mucho protagonismo del vídeo y la luz natural.

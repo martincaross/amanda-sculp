@@ -1,8 +1,8 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { Pause, Play } from "lucide-react";
-import { useEffect, useState } from "react";
+import { Pause, Play, Volume2, VolumeX } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { siteConfig } from "@/data/siteConfig";
 
 const { vibe } = siteConfig.method;
@@ -20,17 +20,95 @@ function barHeights(seed: number) {
 export default function ClassVibePreview() {
   const [activeIdx, setActiveIdx] = useState(1);
   const [playing, setPlaying] = useState(true);
+  const [muted, setMuted] = useState(false);
   const [beat, setBeat] = useState(0);
+  const audioCtxRef = useRef<AudioContext | null>(null);
+
   const track = vibe.tracks[activeIdx];
   const beatSec = 60 / track.bpm;
   const heights = barHeights(activeIdx + 1);
 
-  // 1-2-3-4 Beat Counter synced to exact BPM
+  // Web Audio Beat Synthesizer (Real iOS-compatible sound in sync with BPM)
+  const triggerBeatPulse = (beatIndex: number) => {
+    if (muted) return;
+    try {
+      const AudioCtx =
+        window.AudioContext ||
+        (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+      if (!audioCtxRef.current) {
+        audioCtxRef.current = new AudioCtx();
+      }
+      const ctx = audioCtxRef.current;
+      if (ctx.state === "suspended") {
+        ctx.resume().catch(() => {});
+      }
+
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      if (beatIndex === 0) {
+        // Beat 1: Warm sculpt kick
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(130, now);
+        osc.frequency.exponentialRampToValueAtTime(42, now + 0.12);
+        gain.gain.setValueAtTime(0.32, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.23);
+      } else if (beatIndex === 2) {
+        // Beat 3: Warm clap / snare pulse
+        osc.type = "triangle";
+        osc.frequency.setValueAtTime(200, now);
+        osc.frequency.exponentialRampToValueAtTime(70, now + 0.08);
+        gain.gain.setValueAtTime(0.18, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.14);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.15);
+      } else {
+        // Beats 2 & 4: Soft rhythmic shaker
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(380, now);
+        gain.gain.setValueAtTime(0.06, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.05);
+      }
+    } catch {
+      // Audio not permitted or supported
+    }
+  };
+
+  // 1-2-3-4 Beat Counter synced to exact BPM + Audio Synthesis
   useEffect(() => {
     if (!playing) return;
-    const id = window.setInterval(() => setBeat((b) => (b + 1) % 4), beatSec * 1000);
+    const id = window.setInterval(() => {
+      setBeat((prev) => {
+        const next = (prev + 1) % 4;
+        triggerBeatPulse(next);
+        return next;
+      });
+    }, beatSec * 1000);
     return () => window.clearInterval(id);
-  }, [playing, beatSec]);
+  }, [playing, beatSec, muted]);
+
+  const handleTogglePlay = () => {
+    if (!playing) {
+      triggerBeatPulse(0);
+      setPlaying(true);
+    } else {
+      setPlaying(false);
+      if (audioCtxRef.current && audioCtxRef.current.state === "running") {
+        audioCtxRef.current.suspend().catch(() => {});
+      }
+    }
+  };
 
   return (
     <div
@@ -137,22 +215,33 @@ export default function ClassVibePreview() {
               </AnimatePresence>
             </div>
 
-            <button
-              id="vibe-play-toggle"
-              onClick={() => setPlaying((p) => !p)}
-              aria-label={playing ? "Pause soundwave preview" : "Play soundwave preview"}
-              className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-alabaster text-espresso transition-transform duration-500 hover:scale-105 sm:h-14 sm:w-14"
-            >
-              {playing && (
-                <span
-                  className="absolute inset-0 animate-beat rounded-full"
-                  style={{ backgroundColor: track.accent, animationDuration: `${beatSec}s` }}
-                />
-              )}
-              <span className="relative">
-                {playing ? <Pause className="h-4 w-4 fill-current sm:h-5 sm:w-5" /> : <Play className="ml-0.5 h-4 w-4 fill-current sm:h-5 sm:w-5" />}
-              </span>
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                id="vibe-audio-mute"
+                onClick={() => setMuted((m) => !m)}
+                aria-label={muted ? "Unmute audio beat" : "Mute audio beat"}
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-alabaster/20 bg-alabaster/10 text-alabaster transition-colors hover:bg-alabaster/20"
+              >
+                {muted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
+              </button>
+
+              <button
+                id="vibe-play-toggle"
+                onClick={handleTogglePlay}
+                aria-label={playing ? "Pause soundwave preview" : "Play soundwave preview"}
+                className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-alabaster text-espresso transition-transform duration-500 hover:scale-105 sm:h-14 sm:w-14"
+              >
+                {playing && (
+                  <span
+                    className="absolute inset-0 animate-beat rounded-full"
+                    style={{ backgroundColor: track.accent, animationDuration: `${beatSec}s` }}
+                  />
+                )}
+                <span className="relative">
+                  {playing ? <Pause className="h-4 w-4 fill-current sm:h-5 sm:w-5" /> : <Play className="ml-0.5 h-4 w-4 fill-current sm:h-5 sm:w-5" />}
+                </span>
+              </button>
+            </div>
           </div>
 
           {/* Equalizer Soundwave: hardware-accelerated block bars for 100% mobile compatibility */}
@@ -160,7 +249,7 @@ export default function ClassVibePreview() {
             {heights.map((h, i) => (
               <div key={`${track.id}-${i}`} className="flex h-full flex-1 items-end">
                 <span
-                  className="block w-full origin-bottom rounded-full animate-eq transition-colors duration-500"
+                  className="block w-full origin-bottom rounded-full animate-eq"
                   style={{
                     height: `${h}%`,
                     backgroundColor: i % 6 === 0 ? track.accent : "rgba(249,246,240,0.85)",
@@ -168,6 +257,10 @@ export default function ClassVibePreview() {
                     animationDuration: `${beatSec * (i % 4 === 0 ? 1.4 : i % 3 === 0 ? 1.8 : 1.1)}s`,
                     animationDelay: `${-((i * 0.08) % 1.5)}s`,
                     animationPlayState: playing ? "running" : "paused",
+                    transform: playing
+                      ? `scaleY(${0.3 + 0.7 * Math.abs(Math.sin((beat * 1.57 + i * 0.35)))})`
+                      : "scaleY(0.25)",
+                    transition: "transform 0.12s ease-out, background-color 0.5s ease",
                   }}
                 />
               </div>
