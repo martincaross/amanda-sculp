@@ -42,7 +42,7 @@ export default function ClassVibePreview() {
         aria-hidden="true"
         animate={{ opacity: [0.2, 0.35, 0.2] }}
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        className="pointer-events-none absolute -right-20 -top-20 h-80 w-80 rounded-full sm:-right-32 sm:-top-32 sm:h-96 sm:w-96 sm:blur-[120px]"
+        className="pointer-events-none absolute -right-20 -top-20 h-80 w-80 rounded-full sm:-right-32 sm:-top-32 sm:h-96 sm:w-96 md:blur-[120px]"
         style={{ background: `radial-gradient(circle, ${track.accent} 0%, transparent 70%)` }}
       />
 

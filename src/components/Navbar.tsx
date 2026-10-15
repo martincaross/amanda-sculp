@@ -43,8 +43,8 @@ export default function Navbar() {
           aria-label="Main"
           className={`flex w-full max-w-6xl items-center justify-between rounded-full border py-2 pl-5 pr-2 transition-all duration-500 ease-editorial sm:pl-6 ${
             scrolled
-              ? "border-espresso/10 bg-alabaster/95 shadow-[0_10px_40px_-15px_rgba(28,25,23,0.2)] md:bg-alabaster/85 md:backdrop-blur-md"
-              : "border-transparent bg-alabaster/80 md:bg-alabaster/40 md:backdrop-blur-sm"
+              ? "border-espresso/10 bg-[#F9F6F0]/98 shadow-[0_10px_40px_-15px_rgba(28,25,23,0.2)] md:backdrop-blur-md md:bg-alabaster/85"
+              : "border-transparent bg-[#F9F6F0]/98 md:backdrop-blur-sm md:bg-alabaster/40"
           }`}
         >
           <a

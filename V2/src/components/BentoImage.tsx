@@ -84,7 +84,7 @@ export default function BentoImage({
       )}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-espresso/50 via-transparent to-transparent opacity-80 transition-opacity duration-700 group-hover:opacity-100" />
       <figcaption className="absolute bottom-2.5 left-2.5 right-2.5 sm:bottom-4 sm:left-4 sm:right-4">
-        <span className="inline-block rounded-full bg-alabaster/95 px-2.5 py-1 text-[0.58rem] font-medium uppercase tracking-[0.16em] text-espresso md:bg-alabaster/90 md:backdrop-blur transition-transform duration-500 ease-editorial sm:translate-y-2 sm:px-3 sm:py-1.5 sm:text-[0.6rem] sm:opacity-0 sm:group-hover:translate-y-0 sm:group-hover:opacity-100">
+        <span className="inline-block rounded-full bg-[#F9F6F0]/98 px-2.5 py-1 text-[0.58rem] font-medium uppercase tracking-[0.16em] text-espresso md:backdrop-blur md:bg-alabaster/90 transition-transform duration-500 ease-editorial sm:translate-y-2 sm:px-3 sm:py-1.5 sm:text-[0.6rem] sm:opacity-0 sm:group-hover:translate-y-0 sm:group-hover:opacity-100">
           {caption}
         </span>
       </figcaption>

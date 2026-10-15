@@ -56,10 +56,11 @@ export default function ReelCard({ reel, index }: { reel: Reel; index: number })
             ref={videoRef}
             src={reel.video}
             poster={reel.poster}
+            playsInline
+            autoPlay
             muted
             loop
-            playsInline
-            preload="metadata"
+            preload="none"
             className="h-full w-full object-cover transition-transform duration-[1.5s] ease-editorial group-hover:scale-105"
           />
         ) : (
@@ -82,10 +83,10 @@ export default function ReelCard({ reel, index }: { reel: Reel; index: number })
 
       {/* Top Bar: Class Style & Live BPM */}
       <div className="absolute inset-x-0 top-0 flex items-start justify-between p-3.5 sm:p-4">
-        <span className="rounded-full border border-alabaster/30 bg-espresso/85 px-3 py-1.5 text-[0.6rem] font-medium uppercase tracking-[0.18em] text-alabaster sm:bg-espresso/30 sm:backdrop-blur-md">
+        <span className="rounded-full border border-alabaster/30 bg-espresso/90 px-3 py-1.5 text-[0.6rem] font-medium uppercase tracking-[0.18em] text-alabaster md:backdrop-blur-md md:bg-espresso/30">
           {reel.classStyle}
         </span>
-        <span className="flex items-center gap-1.5 rounded-full bg-alabaster/95 px-2.5 py-1.5 text-[0.62rem] font-semibold tabular-nums text-espresso sm:bg-alabaster/90 sm:backdrop-blur">
+        <span className="flex items-center gap-1.5 rounded-full bg-[#F9F6F0]/98 px-2.5 py-1.5 text-[0.62rem] font-semibold tabular-nums text-espresso md:backdrop-blur md:bg-alabaster/90">
           <span className="relative flex h-1.5 w-1.5">
             <span
               className="absolute inline-flex h-full w-full animate-beat rounded-full bg-clay"
@@ -103,7 +104,7 @@ export default function ReelCard({ reel, index }: { reel: Reel; index: number })
           active ? "scale-75 opacity-0" : "scale-100 opacity-100"
         }`}
       >
-        <span className="flex h-14 w-14 items-center justify-center rounded-full border border-alabaster/40 bg-alabaster/35 text-alabaster shadow-md sm:h-16 sm:w-16 sm:bg-alabaster/20 sm:backdrop-blur-md">
+        <span className="flex h-14 w-14 items-center justify-center rounded-full border border-alabaster/40 bg-alabaster/40 text-alabaster shadow-md sm:h-16 sm:w-16 md:backdrop-blur-md md:bg-alabaster/20">
           <Play className="ml-1 h-5 w-5 fill-current" />
         </span>
       </div>

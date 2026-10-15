@@ -20,11 +20,11 @@ export default function Contact() {
           {/* Ambient Lighting Halos (Pure GPU radial gradients with 0 blur overhead) */}
           <div aria-hidden="true" className="pointer-events-none absolute inset-0">
             <div
-              className="absolute -left-20 top-0 h-96 w-96 rounded-full opacity-60 sm:opacity-80 sm:blur-[130px]"
+              className="absolute -left-20 top-0 h-96 w-96 rounded-full opacity-60 sm:opacity-80 md:blur-[130px]"
               style={{ background: "radial-gradient(circle, rgba(200,125,85,0.28) 0%, transparent 70%)" }}
             />
             <div
-              className="absolute bottom-0 left-1/3 h-72 w-72 rounded-full opacity-50 sm:opacity-70 sm:blur-[120px]"
+              className="absolute bottom-0 left-1/3 h-72 w-72 rounded-full opacity-50 sm:opacity-70 md:blur-[120px]"
               style={{ background: "radial-gradient(circle, rgba(138,154,134,0.25) 0%, transparent 70%)" }}
             />
           </div>

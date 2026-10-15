@@ -66,7 +66,7 @@ export default function Hero() {
           style={{ y: isDesktop ? desktopTextY : 0 }}
           className="relative z-10 lg:col-span-7"
         >
-          <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-espresso/10 bg-alabaster/95 px-3.5 py-1.5 text-[0.62rem] font-medium uppercase tracking-[0.22em] text-espresso/80 sm:mb-8 sm:bg-alabaster/70 sm:backdrop-blur sm:px-4 sm:py-2 sm:text-[0.7rem]">
+          <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-espresso/10 bg-[#F9F6F0]/98 px-3.5 py-1.5 text-[0.62rem] font-medium uppercase tracking-[0.22em] text-espresso/80 sm:mb-8 md:backdrop-blur md:bg-alabaster/70 sm:px-4 sm:py-2 sm:text-[0.7rem]">
             {hero.locationTag}
           </p>
 
@@ -142,18 +142,18 @@ export default function Hero() {
                   className="h-full w-full object-cover"
                   src={hero.video}
                   poster={hero.image}
+                  playsInline
                   autoPlay
                   muted
                   loop
-                  playsInline
-                  preload="metadata"
+                  preload="none"
                 />
               ) : (
                 <Image
                   src={hero.image}
                   alt={hero.imageAlt}
                   fill
-                  preload
+                  priority
                   sizes="(min-width: 1024px) 40vw, 90vw"
                   className="object-cover"
                 />
@@ -167,7 +167,7 @@ export default function Hero() {
             style={{ y: isDesktop ? desktopBadgeY : 0 }}
             className="absolute -left-2 top-6 h-24 w-24 sm:-left-8 sm:top-10 sm:h-32 sm:w-32 lg:-left-12"
           >
-            <div className="relative h-full w-full rounded-full bg-alabaster shadow-md sm:bg-alabaster/85 sm:backdrop-blur-md">
+            <div className="relative h-full w-full rounded-full bg-[#F9F6F0]/98 shadow-md md:backdrop-blur-md md:bg-alabaster/85">
               <svg viewBox="0 0 100 100" className="absolute inset-0 h-full w-full animate-spin-slow" aria-hidden="true">
                 <defs>
                   <path id="hero-badge-path" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0" />
@@ -181,7 +181,7 @@ export default function Hero() {
           </motion.div>
 
           {/* "Now Teaching" Pill: mobile-compact & beat-synced */}
-          <div className="absolute -bottom-4 right-1 flex items-center gap-3 rounded-2xl border border-espresso/10 bg-alabaster/95 p-2.5 pr-4 shadow-[0_15px_40px_-15px_rgba(28,25,23,0.35)] sm:-bottom-6 sm:right-6 sm:gap-4 sm:p-3 sm:pr-5 sm:border-alabaster/50 sm:bg-alabaster/80 sm:backdrop-blur-xl lg:-right-6">
+          <div className="absolute -bottom-4 right-1 flex items-center gap-3 rounded-2xl border border-espresso/10 bg-[#F9F6F0]/98 p-2.5 pr-4 shadow-[0_15px_40px_-15px_rgba(28,25,23,0.35)] sm:-bottom-6 sm:right-6 sm:gap-4 sm:p-3 sm:pr-5 md:backdrop-blur-xl md:border-alabaster/50 md:bg-alabaster/80 lg:-right-6">
             <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-espresso text-clay sm:h-12 sm:w-12">
               <Equalizer />
             </span>
